@@ -4,3 +4,4 @@
 **/obj
 /src/**/*.user
 **.dll
+/src/**/Local.pubxml
