@@ -8,11 +8,13 @@
 		<Description>.NET and .NET Core interprocess communication via TCP</Description>
 		<Company />
 		<Authors>Y56380X</Authors>
-		<Version>1.0.1</Version>
+		<Version>1.1.0</Version>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<RootNamespace>Y56380X.InterComm</RootNamespace>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
 		<PackageLicenseUrl></PackageLicenseUrl>
+		<AssemblyVersion>1.1.0.0</AssemblyVersion>
+		<FileVersion>1.1.0.0</FileVersion>
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.6'">
