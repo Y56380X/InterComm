@@ -20,18 +20,20 @@
 	SOFTWARE.
 */
 
+using System;
+
 namespace Y56380X.InterComm
 {
 	public class InterCommRequest
 	{
 		[Newtonsoft.Json.JsonProperty(Required = Newtonsoft.Json.Required.Always)]
-		public InterCommAction Action { get; protected set; }
+		public Enum Action { get; protected set; }
 		public object RequestValue { get; set; }
 
 		[Newtonsoft.Json.JsonIgnore]
 		public object ResponseValue { get; protected set; }
 
-		public InterCommRequest(InterCommAction action, object requestValue)
+		public InterCommRequest(Enum action, object requestValue)
 		{
 			Action = action;
 			RequestValue = requestValue;
@@ -42,31 +44,22 @@ namespace Y56380X.InterComm
 		public InterCommRequest() { }
 	}
 
-	public class InterCommRequest<T> : InterCommRequest
+	public class InterCommRequest<TAction, TValue> : InterCommRequest
 	{
 		[Newtonsoft.Json.JsonIgnore]
-		public new T ResponseValue { get; private set; }
+		public new TValue ResponseValue { get; private set; }
 
-		public InterCommRequest(InterCommAction action, object requestValue)
+		[Newtonsoft.Json.JsonProperty(Required = Newtonsoft.Json.Required.Always)]
+		public new TAction Action { get; private set; }
+
+		public InterCommRequest(TAction action, object requestValue)
 		{
 			Action = action;
 			RequestValue = requestValue;
 
-			ResponseValue = new InterCommJsonMessage<T>(InterCommClient.Current.Value.SendMessage(new InterCommJsonMessage<InterCommRequest>(this))).Data;
+			ResponseValue = new InterCommJsonMessage<TValue>(InterCommClient.Current.Value.SendMessage(new InterCommJsonMessage<InterCommRequest>(this))).Data;
 		}
 
 		public InterCommRequest() { }
-	}
-
-	public enum InterCommAction
-	{
-		GetDevices,
-		GetDevice,
-		SearchForUnconnectedSensors,
-		ConnectNewSensor,
-		ReloadComponents,
-		UpdateDevice,
-		GetComponents,
-		GetUIElementsByParent
 	}
 }

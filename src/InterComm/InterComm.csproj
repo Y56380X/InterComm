@@ -1,19 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard1.6;net45</TargetFrameworks>
+		<TargetFrameworks>netstandard1.6;netstandard2.0;net45</TargetFrameworks>
 		<Copyright>Copyright © 2017 Y56380X</Copyright>
 		<PackageProjectUrl>https://github.com/Y56380X/InterComm</PackageProjectUrl>
 		<PackageTags>IPC</PackageTags>
 		<Description>.NET and .NET Core interprocess communication via TCP</Description>
 		<Company />
 		<Authors>Y56380X</Authors>
-		<Version>1.0.1</Version>
+		<Version>1.2.0</Version>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<RootNamespace>Y56380X.InterComm</RootNamespace>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
 		<PackageLicenseUrl></PackageLicenseUrl>
+		<AssemblyVersion>1.2</AssemblyVersion>
+		<FileVersion>1.2</FileVersion>
 	</PropertyGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+		<PackageReference Include="System.Threading.Thread" Version="4.3.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.6'">
 		<PackageReference Include="System.Threading.Thread" Version="4.3.0" />
